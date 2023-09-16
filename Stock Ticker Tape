@@ -1,0 +1,77 @@
+<div class="tradingview-widget-container">
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+    "symbols": [
+      {
+        "proName": "FOREXCOM:SPXUSD",
+        "title": "S&P 500"
+      },
+      {
+        "description": "Apple",
+        "proName": "NASDAQ:AAPL"
+      },
+      {
+        "description": "Telsa",
+        "proName": "NASDAQ:TSLA"
+      },
+      {
+        "description": "NVIDIA",
+        "proName": "NASDAQ:NVDA"
+      },
+      {
+        "description": "Amazon",
+        "proName": "NASDAQ:AMZN"
+      },
+      {
+        "description": "Netflix",
+        "proName": "NASDAQ:NFLX"
+      },
+      {
+        "description": "Walt Disney Company",
+        "proName": "NYSE:DIS"
+      },
+      {
+        "description": "Nio",
+        "proName": "NYSE:NIO"
+      },
+      {
+        "description": "Google",
+        "proName": "NASDAQ:GOOG"
+      },
+      {
+        "description": "Gamestop",
+        "proName": "NYSE:GME"
+      },
+      {
+        "description": "Roku",
+        "proName": "NASDAQ:ROKU"
+      },
+      {
+        "description": "Walmart",
+        "proName": "NYSE:WMT"
+      },
+      {
+        "description": "Visa",
+        "proName": "NYSE:V"
+      },
+      {
+        "description": "Costco",
+        "proName": "NASDAQ:COST"
+      },
+      {
+        "description": "Nike",
+        "proName": "NYSE:NKE"
+      },
+      {
+        "description": "United Parcel Service",
+        "proName": "NYSE:UPS"
+      }
+    ],
+    "showSymbolLogo": true,
+    "colorTheme": "light",
+    "isTransparent": false,
+    "displayMode": "adaptive",
+    "locale": "en"
+  }
+    </script>
+  </div>
