@@ -26,15 +26,11 @@ import yfinance as yf
 #     print(data[ticker].tail())
 
 
-def import_stock_data(tickers, start='2012-1-1'):
+def import_stock_data(tickers, start='2012-01-01'):
     data = pd.DataFrame()
     yf.pdr_override()
-    if len([tickers]) == 1:
-        data[tickers] = wb.DataReader(tickers, start=start)['Adj Close']
-        data = pd.DataFrame(data)
-    else:
-        for ticker in tickers:
-            data[ticker] = wb.DataReader(ticker, start=start)['Adj Close']
+    data[tickers] = wb.DataReader(tickers, start=start)['Adj Close']
+    data = pd.DataFrame(data)
     return data
 
 
@@ -75,8 +71,8 @@ def probs_find(predicted, higherthan, on='value'):
         predList = list(predicted)
         over = [i for i in predList if i >= higherthan]
         less = [i for i in predList if i < higherthan]
-    else:
-        print("'on' must be either value or return")
+    #else:
+        #print("'on' must be either value or return")
     return (len(over) / (len(over) + len(less)))
 
 
@@ -95,25 +91,27 @@ def simulate_mc(data, days, iterations, plot=True):
     if plot == True:
         x = pd.DataFrame(price_list).iloc[-1]
         fig, ax = plt.subplots(1, 2, figsize=(14, 4))
-        sns.distplot(x, ax=ax[0])
-        sns.distplot(x, hist_kws={'cumulative': True}, kde_kws={'cumulative': True}, ax=ax[1])
-        plt.xlabel("Stock Price")
-        plt.show()
+        #sns.distplot(x, ax=ax[0])
+        #sns.distplot(x, hist_kws={'cumulative': True}, kde_kws={'cumulative': True}, ax=ax[1])
+        #plt.xlabel("Stock Price")
+        #plt.show()
+        for i in range(0, len(price_list)):
+            price_list[i] = np.round(price_list[i], 2)
 
     # CAPM and Sharpe Ratio
 
     # Printing information about stock
-    try:
-        [print(nam) for nam in data.columns]
-    except:
-        print(data.name)
-    print(f"Days: {days - 1}")
-    print(f"Expected Value: ${round(pd.DataFrame(price_list).iloc[-1].mean(), 2)}")
-    print(
-        f"Return: {round(100 * (pd.DataFrame(price_list).iloc[-1].mean() - price_list[0, 1]) / pd.DataFrame(price_list).iloc[-1].mean(), 2)}%")
-    print(f"Probability of Breakeven: {probs_find(pd.DataFrame(price_list), 0, on='return')}")
+    #try:
+    #    [print(nam) for nam in data.columns]
+    #except:
+    #    print(data.name)
+    #print(f"Days: {days - 1}")
+    #print(f"Expected Value: ${round(pd.DataFrame(price_list).iloc[-1].mean(), 2)}")
+    #print(
+    #    f"Return: {round(100 * (pd.DataFrame(price_list).iloc[-1].mean() - price_list[0, 1]) / pd.DataFrame(price_list).iloc[-1].mean(), 2)}%")
+    #print(f"Probability of Breakeven: {probs_find(pd.DataFrame(price_list), 0, on='return')}")
 
-    return pd.DataFrame(price_list)
+    return pd.DataFrame(price_list).head().to_numpy()
 
 
 def monte_carlo(tickers, days_forecast, iterations, start_date='2012-1-1', plotten=False):
@@ -132,5 +130,3 @@ def monte_carlo(tickers, days_forecast, iterations, start_date='2012-1-1', plott
     simulatedDF = pd.concat(simulatedDF)
     return simulatedDF
 
-
-sys.stdout.flush()
